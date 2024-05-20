@@ -1,0 +1,51 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+body {
+  background-color: #6ab;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  height: 440px;
+  margin-top: -50px;
+}
+
+.gameover-message {
+  color: #fff;
+  display: block;
+  margin-bottom: 20px;
+  font-size: 32px;
+}
+
+.board {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.board-row {
+  display: flex;
+}
+
+.board-cell {
+  color: black;
+  height: 80px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 42px;
+}
+
+.border-left { border-left: solid 1px; }
+.border-right { border-right: solid 1px; }
+.border-top { border-top: solid 1px; }
+.border-bottom { border-bottom: solid 1px; }
+
