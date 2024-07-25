@@ -65,7 +65,8 @@ function App() {
   ]);
 
   const [currPlayer, setCurrentPlayer] = useState("x");
-  const [outcome, setOutcome] = useState(null)
+  
+  const [outcome, setOutcome] = useState(null);
 
   useEffect(() => {
     // check for game over conditions
@@ -76,7 +77,7 @@ function App() {
     } = checkGameState(board)
 
     if (isGameOver && !hasWinner) {
-      setOutcome('Cat\'s game!') 
+      setOutcome('Cat\'s game!')
     } else if (isGameOver && hasWinner) {
       setOutcome(`${winner} wins!`)
     } 
@@ -86,21 +87,29 @@ function App() {
     // Essentially this allows us to check for a game over condition after every turn
   }, [currPlayer])
 
-
-  const handleTogglePlayer = () => {
-    setCurrentPlayer(prev => prev === "x" ? "o" : "x")
-  }
-
   const handleSelectMove = (i, j) => {
     if (board[i][j] !== "") {
       // invalid/repeat move
       return;
     }
     setBoard(prevBoard => {
-      prevBoard[i][j] = currPlayer;
-      return prevBoard;
+      const newBoard = prevBoard.map(row => [...row]);
+      newBoard[i][j] = currPlayer;
+      return newBoard;
     })
-    handleTogglePlayer()
+
+    // toggle to next player
+    setCurrentPlayer(prev => prev === "x" ? "o" : "x")
+  }
+
+  const handleReset = () => {
+    setBoard([
+      ["", "", ""],
+      ["", "", ""],
+      ["", "", ""]
+    ])
+    setOutcome(null)
+    setCurrentPlayer('x')
   }
 
   return (
@@ -119,8 +128,35 @@ function App() {
         Mirrors js/html event handler names like onClick, onHover, etc
         */
       }
-      <GameBoard board={board} onSelectMove={handleSelectMove}/>
+      <GameBoard 
+        board={board} 
+        onSelectMove={handleSelectMove}
+      />
+
+      <ResetBtn
+        board={board}
+        onReset={handleReset}
+      />
+
     </div>
+  )
+}
+
+function ResetBtn({ board, onReset }) {
+  
+  const isBoardEmpty = board.every(row => row.every(cell => cell === ''));
+
+  return (
+    <>
+      {!isBoardEmpty && (
+        <button
+          className="reset-btn"
+          onClick={onReset}
+        >
+          Reset
+        </button>
+      )}
+    </>
   )
 }
 

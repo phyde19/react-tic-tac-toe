@@ -49,3 +49,20 @@ body {
 .border-top { border-top: solid 1px; }
 .border-bottom { border-bottom: solid 1px; }
 
+
+.reset-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #03133d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reset-btn:hover {
+  background-color: #ff8787;
+}
+
